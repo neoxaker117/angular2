@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-require('../../css/common.scss');
+require('../../style/css/common.scss');
 
 @Component({
     selector: 'app',
@@ -8,4 +8,5 @@ require('../../css/common.scss');
 })
 
 export class AppComponent {
+
 }
