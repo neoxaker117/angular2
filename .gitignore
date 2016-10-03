@@ -9,3 +9,6 @@ out
 gen
 typings
 node_modules
+dist
+src/**/*.js
+src/**/*.map
