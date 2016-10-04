@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 require('../../style/css/common.scss');
 
@@ -8,16 +8,9 @@ require('../../style/css/common.scss');
 })
 
 export class MainComponent {
-    @Input() date: number;
-
-    private nowDate: Date;
 
     constructor() {
 
     }
 
-    ngOnInit() {
-        this.nowDate = new Date();
-        this.date = this.nowDate.getFullYear();
-    }
 }
