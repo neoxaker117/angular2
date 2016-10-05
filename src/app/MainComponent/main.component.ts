@@ -1,9 +1,9 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 require('../../style/css/common.scss');
 
 @Component({
-    selector: 'app',
+    selector: 'alphabetr-app',
     templateUrl: 'main.component.html',
 })
 

@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'symbol',
+    selector: 'alphabetr-symbol',
     templateUrl: 'symbol.component.html',
 })
 

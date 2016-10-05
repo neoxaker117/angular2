@@ -1,6 +1,6 @@
-import {ModuleWithProviders} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {SymbolComponent} from "./SymbolComponent/symbol.component";
+import { ModuleWithProviders } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { SymbolComponent } from "./SymbolComponent/symbol.component.ts";
 
 const appRoutes: Routes = [
     {
