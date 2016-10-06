@@ -1,14 +1,13 @@
 <md-sidenav-layout>
-    <md-sidenav #sidenav>
-        <nav>
-            <a routerLink="/symbol" routerLinkActive="active">symbol</a>
-        </nav>
+    <md-sidenav #sideNav>
+        <md-nav-list>
+            <a md-list-item  routerLink="/symbol" routerLinkActive="active">symbol</a>
+        </md-nav-list>
     </md-sidenav>
 
     <md-toolbar color="primary">
-        <md-icon (click)="sidenav.open()">menu</md-icon>
+        <md-icon (click)="sideNav.open()">menu</md-icon>
     </md-toolbar>
-
 
 
     <h1>Angular Material</h1>

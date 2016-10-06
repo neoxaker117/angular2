@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 require('../../style/css/common.scss');
 
@@ -7,9 +7,13 @@ require('../../style/css/common.scss');
     templateUrl: 'main.component.html',
 })
 
-export class MainComponent {
+export class MainComponent implements OnInit {
 
     constructor() {
+
+    }
+
+    ngOnInit() {
 
     }
 
