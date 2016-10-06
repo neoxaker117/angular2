@@ -1,12 +1,17 @@
 import { Injectable } from "@angular/core";
+import { Title } from '@angular/platform-browser';
 
 @Injectable()
 export class MainService {
 
     private pageTitle: string;
 
-    constructor() {
+    constructor(private titleService: Title) {
 
+    }
+
+    public setDocumentTitle(title: string) {
+        this.titleService.setTitle(title);
     }
 
     public setPageTitle(title: string) {

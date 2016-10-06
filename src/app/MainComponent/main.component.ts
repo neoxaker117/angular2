@@ -33,6 +33,8 @@ export class MainComponent implements OnInit {
 
             if(event instanceof NavigationEnd) {
                 this.pageTitle = this.mainService.getPageTitle();
+
+                this.mainService.setDocumentTitle(this.pageTitle);
             }
         });
     }
