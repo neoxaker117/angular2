@@ -5,6 +5,8 @@ import { MaterialModule } from '@angular/material';
 import { routing, appRoutingProviders }  from './app.routing.ts';
 import { MainComponent }   from './MainComponent/main.component.ts';
 import { SymbolComponent } from "./SymbolComponent/symbol.component.ts";
+import { ListComponent } from "./ListComponent/list.component.ts";
+import { MainService } from "./MainComponent/main.service.ts";
 
 @NgModule({
     imports: [
@@ -14,10 +16,12 @@ import { SymbolComponent } from "./SymbolComponent/symbol.component.ts";
     ],
     declarations: [
         MainComponent,
-        SymbolComponent
+        SymbolComponent,
+        ListComponent
     ],
     providers: [
-        appRoutingProviders
+        appRoutingProviders,
+        MainService
     ],
     bootstrap: [
         MainComponent
