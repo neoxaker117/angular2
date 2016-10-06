@@ -1,5 +1,14 @@
-<h1>Angular Router</h1>
-<nav>
-    <a routerLink="/symbol" routerLinkActive="active">symbol</a>
-</nav>
-<router-outlet></router-outlet>
+<md-sidenav-layout>
+    <md-sidenav #sidenav>
+        <nav>
+            <a routerLink="/symbol" routerLinkActive="active">symbol</a>
+        </nav>
+    </md-sidenav>
+
+    <button md-button (click)="sidenav.open()">Open sidenav</button>
+
+    <h1>Angular Material</h1>
+
+    <router-outlet></router-outlet>
+</md-sidenav-layout>
+
