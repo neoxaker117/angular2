@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MainService } from "../MainComponent/main.service.ts";
+import { PageService } from "../MainComponent/main.service.ts";
 
 @Component({
     selector: 'alphabetr-list',
@@ -7,7 +7,7 @@ import { MainService } from "../MainComponent/main.service.ts";
 })
 export class ListComponent implements OnInit {
 
-    constructor(private mainService: MainService) {
+    constructor(private mainService: PageService) {
 
     }
 

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Title } from '@angular/platform-browser';
 
 @Injectable()
-export class MainService {
+export class PageService {
 
     private pageTitle: string;
 

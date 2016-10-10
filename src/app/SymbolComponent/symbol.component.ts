@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MainService } from "../MainComponent/main.service.ts";
+import { PageService } from "../MainComponent/main.service.ts";
 
 @Component({
     selector: 'alphabetr-symbol',
@@ -8,12 +8,12 @@ import { MainService } from "../MainComponent/main.service.ts";
 
 export class SymbolComponent implements OnInit {
 
-    constructor(private mainService: MainService) {
+    constructor(private pageService: PageService) {
 
     }
 
     ngOnInit() {
-        this.mainService.setPageTitle('Symbol');
+        this.pageService.setPageTitle('Symbol');
     }
 
 }

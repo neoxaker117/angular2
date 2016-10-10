@@ -2,13 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { MdSidenav } from "@angular/material";
 
-import { MainService } from "./main.service.ts";
+import { PageService } from "./main.service.ts";
 
 require('../../style/css/common.scss');
 
 @Component({
     selector: 'alphabetr-app',
-    templateUrl: 'main.component.html',
+    templateUrl: 'main.component.html'
 })
 
 export class MainComponent implements OnInit {
@@ -18,7 +18,7 @@ export class MainComponent implements OnInit {
     private pageTitle: string = '';
 
     constructor(
-        private mainService: MainService,
+        private pageService: PageService,
         private router: Router
     ) {
 
@@ -32,9 +32,9 @@ export class MainComponent implements OnInit {
             }
 
             if(event instanceof NavigationEnd) {
-                this.pageTitle = this.mainService.getPageTitle();
+                this.pageTitle = this.pageService.getPageTitle();
 
-                this.mainService.setDocumentTitle(this.pageTitle);
+                this.pageService.setDocumentTitle(this.pageTitle);
             }
         });
     }
