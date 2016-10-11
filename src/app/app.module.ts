@@ -1,20 +1,24 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from '@angular/material';
+import { FormsModule }   from '@angular/forms';
 
 import { routing, appRoutingProviders }  from './app.routing.ts';
 import { MainComponent }   from './MainComponent/main.component.ts';
 import { SymbolComponent } from "./SymbolComponent/symbol.component.ts";
 import { ListComponent } from "./ListComponent/list.component.ts";
 import { PageService } from "./MainComponent/main.service.ts";
+import { CreateSymbolComponent } from "./CreateSymbolComponent/createsymbol.component.ts";
 
 @NgModule({
     imports: [
         BrowserModule,
+        FormsModule,
         MaterialModule.forRoot(),
         routing
     ],
     declarations: [
+        CreateSymbolComponent,
         MainComponent,
         SymbolComponent,
         ListComponent

@@ -11,7 +11,6 @@ import { SymbolService } from "./symbol.service.ts";
     selector: 'alphabetr-symbol',
     templateUrl: 'symbol.component.html',
 })
-
 export class SymbolComponent implements OnInit {
 
     private symbol: Symbol;

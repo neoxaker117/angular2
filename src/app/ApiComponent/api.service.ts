@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+
 import { Symbol } from "../SymbolComponent/symbol.ts";
 
 @Injectable()
@@ -27,6 +28,14 @@ export class ApiService {
 
         return new Promise((resolve, reject) => {
             resolve(symbolList);
+        });
+    }
+
+    sendSymbol(symbol: Symbol) {
+        return new Promise((resolve, reject) => {
+            let savedSymbol: Symbol = new Symbol(Date.now(), symbol.getTitle());
+
+            resolve(savedSymbol);
         });
     }
 

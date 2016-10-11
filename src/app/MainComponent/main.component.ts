@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { MdSidenav } from "@angular/material";
 
-
 import { PageService } from "./main.service.ts";
 
 require('../../style/css/common.scss');
@@ -11,7 +10,6 @@ require('../../style/css/common.scss');
     selector: 'alphabetr-app',
     templateUrl: 'main.component.html'
 })
-
 export class MainComponent implements OnInit {
 
     @ViewChild('sideNav') sideNav: MdSidenav;
