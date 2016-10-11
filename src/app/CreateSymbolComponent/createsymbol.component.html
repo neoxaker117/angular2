@@ -1,6 +1,13 @@
-<form #form="ngForm" (submit)="onSubmit()">
-    <input type="text" [(ngModel)]="symbol.title" name="title" />
-    <button type="submit">Create</button>
+<form [formGroup]="symbolForm" (ngSubmit)="onSubmit(symbolForm.value)">
+
+    <input type="text" [formControl]="symbolForm.controls['title']">
+
+    <button type="submit" [disabled]="!symbolForm.valid">Create</button>
+
+    <div *ngIf="validateField('title', 'required')">You must include a title.</div>
+    <div *ngIf="validateField('title', 'minlength')">Your last name must be at least 4 characters long.</div>
+    <div *ngIf="validateField('title', 'maxlength')">Your last name cannot exceed 24 characters.</div>
+
 </form>
 
 

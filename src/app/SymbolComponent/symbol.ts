@@ -1,11 +1,14 @@
-import { ISymbol } from "./symbol.interface.ts"
+import { ISymbol, ISymbolOptions } from "./symbol.interface.ts"
 
-export class  Symbol implements ISymbol {
+export class Symbol implements ISymbol {
 
-    constructor(
-        private id: number = 0,
-        private title: string = ''
-    ) {  }
+    private id: number;
+    private title: string;
+
+    constructor(options?: ISymbolOptions) {
+        this.id = options && options.id || 0;
+        this.title = options && options.title || '';
+    }
 
     public getId() {
         return this.id;

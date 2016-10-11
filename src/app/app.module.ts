@@ -1,7 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from '@angular/material';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
 import { routing, appRoutingProviders }  from './app.routing.ts';
 import { MainComponent }   from './MainComponent/main.component.ts';
@@ -14,6 +14,7 @@ import { CreateSymbolComponent } from "./CreateSymbolComponent/createsymbol.comp
     imports: [
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         MaterialModule.forRoot(),
         routing
     ],

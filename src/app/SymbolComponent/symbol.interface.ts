@@ -5,3 +5,8 @@ export interface ISymbol {
 
     setTitle(title: string): void;
 }
+
+export interface ISymbolOptions {
+    id?: number
+    title: string,
+}
