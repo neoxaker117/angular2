@@ -18,21 +18,19 @@ export class MainComponent implements OnInit {
 
     private pageTitle: string = '';
 
-    constructor(
-        private pageService: PageService,
-        private router: Router
-    ) {
+    constructor(private pageService: PageService,
+                private router: Router) {
 
     }
 
     ngOnInit() {
         this.router.events.subscribe(event => {
 
-            if(event instanceof NavigationStart) {
+            if (event instanceof NavigationStart) {
                 this.sideNav.close();
             }
 
-            if(event instanceof NavigationEnd) {
+            if (event instanceof NavigationEnd) {
                 this.pageTitle = this.pageService.getPageTitle();
 
                 this.pageService.setDocumentTitle(this.pageTitle);

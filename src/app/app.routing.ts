@@ -6,11 +6,11 @@ import { ListComponent } from "./ListComponent/list.component.ts";
 const appRoutes: Routes = [
     {
         path: '',
-        redirectTo: '/symbol',
+        redirectTo: '/list',
         pathMatch: 'full'
     },
     {
-        path: 'symbol',
+        path: 'symbol/:id',
         component: SymbolComponent
     },
     {

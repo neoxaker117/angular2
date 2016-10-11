@@ -9,7 +9,7 @@ export class ApiService {
     }
 
     getSymbolById(id: number) {
-        let symbol: Symbol = new Symbol('New symbol: ' + id);
+        let symbol: Symbol = new Symbol(id, 'New symbol');
 
         return new Promise((resolve, reject) => {
             resolve(symbol);
@@ -18,11 +18,11 @@ export class ApiService {
 
     getSymbolList() {
         let symbolList: Array<Symbol> = [
-            new Symbol('symbol 1'),
-            new Symbol('symbol 2'),
-            new Symbol('symbol 3'),
-            new Symbol('symbol 4'),
-            new Symbol('symbol 5'),
+            new Symbol(1, 'symbol'),
+            new Symbol(2, 'symbol'),
+            new Symbol(3, 'symbol'),
+            new Symbol(4, 'symbol'),
+            new Symbol(5, 'symbol'),
         ];
 
         return new Promise((resolve, reject) => {

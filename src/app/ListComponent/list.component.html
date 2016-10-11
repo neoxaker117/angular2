@@ -1,3 +1,4 @@
-<ul>
-    <li *ngFor="let symbol of symbolList">{{symbol.getTitle()}}</li>
+<ul *ngIf="symbolList">
+    <li *ngFor="let symbol of symbolList"
+        (click)="symbolService.goToSymbolPage(symbol)">{{symbol.getTitle()}} {{symbol.getId()}}</li>
 </ul>

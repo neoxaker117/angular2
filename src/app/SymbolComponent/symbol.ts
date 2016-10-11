@@ -3,8 +3,13 @@ import { ISymbol } from "./symbol.interface.ts"
 export class  Symbol implements ISymbol {
 
     constructor(
+        private id: number,
         private title: string
     ) {  }
+
+    public getId() {
+        return this.id;
+    }
 
     public getTitle() {
         return this.title;
