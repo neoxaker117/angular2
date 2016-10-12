@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { PageService } from "../MainComponent/main.service.ts";
@@ -20,11 +20,13 @@ export class CreateSymbolComponent implements OnInit {
 
     private symbolForm: FormGroup;
     private pixiCanvas: any = {};
+    private canvasSize: { width: number, height: number };
 
     constructor(private pageService: PageService,
                 private apiService: ApiService,
                 private symbolService: SymbolService,
-                private formBuilder: FormBuilder) {
+                private formBuilder: FormBuilder,
+                private renderer: Renderer) {
 
     }
 
@@ -35,7 +37,11 @@ export class CreateSymbolComponent implements OnInit {
 
         let newSymbol: Symbol = new Symbol(value);
 
+        this.createCanvasStage();
+
         this.drawText(newSymbol.getTitle());
+
+        this.renderCanvasStage();
 
         // this.symbolService.createSymbol(newSymbol).then((symbol: Symbol) => {
         //     this.symbolService.goToSymbolPage(symbol);
@@ -53,19 +59,41 @@ export class CreateSymbolComponent implements OnInit {
         return notValid;
     }
 
-    drawText(text: string) {
+    createCanvasStage() {
         this.pixiCanvas.stage = new PIXI.Container();
+    }
 
-        var canvasText = new PIXI.Text(text, {
+    renderCanvasStage() {
+        this.pixiCanvas.renderer.render(this.pixiCanvas.stage);
+    }
+
+    drawText(text: string) {
+        var style = {
+            align: 'center',
             fontFamily: 'Arial',
-            fontSize: 24,
-            fill: 0xff1010,
-            align: 'center'
-        });
+            fontSize: '36px',
+            // fontStyle: 'italic',
+            // fontWeight: 'bold',
+            fill: '#F7EDCA',
+            stroke: '#4a1850',
+            strokeThickness: 5,
+            // dropShadow: true,
+            // dropShadowColor: '#000000',
+            // dropShadowAngle: Math.PI / 6,
+            // dropShadowDistance: 6,
+            wordWrap: true,
+            wordWrapWidth: this.canvasSize.width
+        };
+
+        var canvasText = new PIXI.Text(text, style);
+
+        var canvasTextCenterX = (this.canvasSize.width - canvasText.width) / 2;
+        var canvasTextCenterY = (this.canvasSize.height - canvasText.height);
+
+        canvasText.x = canvasTextCenterX;
+        canvasText.y = canvasTextCenterY;
 
         this.pixiCanvas.stage.addChild(canvasText);
-
-        this.pixiCanvas.renderer.render(this.pixiCanvas.stage);
     }
 
     ngOnInit() {
@@ -73,13 +101,28 @@ export class CreateSymbolComponent implements OnInit {
             'title': ['', [
                 Validators.required,
                 Validators.minLength(4),
-                Validators.maxLength(24),
+                Validators.maxLength(100),
             ]],
         });
 
-        this.pixiCanvas.renderer = PIXI.autoDetectRenderer(200, 200, {
-            view: this.createCanvas.nativeElement
+        this.canvasSize = {
+            width: 200,
+            height: 200
+        };
+
+        this.renderer.setElementStyle(this.createCanvas.nativeElement, 'width', this.canvasSize.width + 'px');
+        this.renderer.setElementStyle(this.createCanvas.nativeElement, 'height', this.canvasSize.height + 'px');
+
+        this.pixiCanvas.renderer = PIXI.autoDetectRenderer(this.canvasSize.width, this.canvasSize.height, {
+            view: this.createCanvas.nativeElement,
+            backgroundColor: 0x1099bb,
+            antialias: true,
+            resolution: 2
         });
+
+        this.createCanvasStage();
+
+        this.renderCanvasStage();
 
         this.pageService.setPageTitle('Create symbol');
     }
