@@ -7,6 +7,6 @@ export interface ISymbol {
 }
 
 export interface ISymbolOptions {
-    id?: number
-    title: string,
+    id?: number;
+    title: string;
 }

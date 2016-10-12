@@ -21,6 +21,7 @@ export class SymbolService {
     }
 
     createSymbol(symbol: Symbol) {
+        console.log('creating symbol:', symbol);
         return this.apiService.sendSymbol(symbol);
     }
 

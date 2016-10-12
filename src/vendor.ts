@@ -9,3 +9,5 @@ import '@angular/router';
 import 'rxjs';
 // Other vendors for example jQuery, Lodash or Bootstrap
 // You can import js, ts, css, sass, ...
+// import 'pixi.js/src/index.js'
+import 'pixi.js/bin/pixi.min.js'
