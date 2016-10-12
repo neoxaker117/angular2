@@ -77,6 +77,7 @@ export class CreateSymbolComponent implements OnInit {
             fill: '#F7EDCA',
             stroke: '#4a1850',
             strokeThickness: 5,
+            lineJoin: 'round',
             // dropShadow: true,
             // dropShadowColor: '#000000',
             // dropShadowAngle: Math.PI / 6,
