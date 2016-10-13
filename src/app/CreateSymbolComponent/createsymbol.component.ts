@@ -40,12 +40,13 @@ export class CreateSymbolComponent implements OnInit {
     onFileChange(event: any) {
         let fileList: FileList = event.target.files;
         let file: File;
+        let isValid: Boolean = true;
 
         if (fileList.length) {
             file = fileList[0];
+        } else {
+            isValid = false;
         }
-
-        let isValid = true;
 
         if (isValid) {
             this.drawImage(file);
