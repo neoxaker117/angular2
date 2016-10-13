@@ -1,6 +1,7 @@
 <form [formGroup]="symbolForm" (ngSubmit)="onSubmit(symbolForm.value)">
 
-    <input type="text" [formControl]="symbolForm.controls['title']">
+    <input type="text" [formControl]="symbolForm.controls['title']" (keyup)="onKeyUp(symbolForm.value)">
+    <input type="file" [formControl]="symbolForm.controls['image']" (change)="onFileChange($event)" />
 
     <button type="submit" [disabled]="!symbolForm.valid">Create</button>
 

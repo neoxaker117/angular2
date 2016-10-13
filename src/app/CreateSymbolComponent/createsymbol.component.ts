@@ -21,6 +21,8 @@ export class CreateSymbolComponent implements OnInit {
     private symbolForm: FormGroup;
     private pixiCanvas: any = {};
     private canvasSize: { width: number, height: number };
+    private symbol: Symbol;
+    private layers: any;
 
     constructor(private pageService: PageService,
                 private apiService: ApiService,
@@ -30,20 +32,32 @@ export class CreateSymbolComponent implements OnInit {
 
     }
 
+    onKeyUp(value: ISymbolOptions) {
+        this.drawSymbol(value.title);
+        this.drawText(value.title);
+    }
+
+    onFileChange(event: any) {
+        let fileList: FileList = event.target.files;
+        let file: File;
+
+        if (fileList.length) {
+            file = fileList[0];
+        }
+
+        let isValid = true;
+
+        if (isValid) {
+            this.drawImage(file);
+        }
+    }
+
     onSubmit(value: ISymbolOptions) {
         if (!this.symbolForm.valid) {
             return false;
         }
 
-        let newSymbol: Symbol = new Symbol(value);
-
-        this.createCanvasStage();
-
-        this.drawText(newSymbol.getTitle());
-
-        this.renderCanvasStage();
-
-        // this.symbolService.createSymbol(newSymbol).then((symbol: Symbol) => {
+        // this.symbolService.createSymbol(this.symbol).then((symbol: Symbol) => {
         //     this.symbolService.goToSymbolPage(symbol);
         // });
     }
@@ -59,56 +73,108 @@ export class CreateSymbolComponent implements OnInit {
         return notValid;
     }
 
-    createCanvasStage() {
+    initCanvasLayers() {
         this.pixiCanvas.stage = new PIXI.Container();
+
+        this.layers = {
+            symbol: new PIXI.Container(),
+            text: new PIXI.Container(),
+            image: new PIXI.Container()
+        };
+
+        this.pixiCanvas.stage.addChild(this.layers.image);
+        this.pixiCanvas.stage.addChild(this.layers.symbol);
+        this.pixiCanvas.stage.addChild(this.layers.text);
     }
 
     renderCanvasStage() {
         this.pixiCanvas.renderer.render(this.pixiCanvas.stage);
     }
 
-    drawText(text: string) {
-        var style = {
+    drawImage(file: File) {
+        var reader = new FileReader();
+
+        reader.addEventListener("load", () => {
+            let sprite = new PIXI.Sprite.fromImage(reader.result);
+
+            this.layers.image.removeChildren();
+            this.layers.image.addChild(sprite);
+        });
+
+        reader.readAsDataURL(file);
+    }
+
+    drawSymbol(text: string) {
+        let style = {
             align: 'center',
             fontFamily: 'Arial',
-            fontSize: '36px',
-            // fontStyle: 'italic',
-            // fontWeight: 'bold',
+            fontSize: '56px',
+            fontWeight: 'bold',
             fill: '#F7EDCA',
             stroke: '#4a1850',
             strokeThickness: 5,
             lineJoin: 'round',
-            // dropShadow: true,
-            // dropShadowColor: '#000000',
-            // dropShadowAngle: Math.PI / 6,
-            // dropShadowDistance: 6,
+            dropShadow: true,
+            dropShadowColor: '#000000',
+            dropShadowAngle: Math.PI / 6,
+            dropShadowDistance: 6,
             wordWrap: true,
             wordWrapWidth: this.canvasSize.width
         };
 
-        var canvasText = new PIXI.Text(text, style);
+        let drawSymbol = text.slice(0, 1).toUpperCase();
+        let canvasText = new PIXI.Text(drawSymbol, style);
 
-        var canvasTextCenterX = (this.canvasSize.width - canvasText.width) / 2;
-        var canvasTextCenterY = (this.canvasSize.height - canvasText.height);
+        canvasText.x = 10;
+
+        this.layers.symbol.removeChildren();
+        this.layers.symbol.addChild(canvasText);
+    }
+
+    drawText(text: string) {
+        let style = {
+            align: 'center',
+            fontFamily: 'Arial',
+            fontSize: 36,
+            lineHeight: 38,
+            fill: '#F7EDCA',
+            stroke: '#4a1850',
+            strokeThickness: 5,
+            lineJoin: 'round',
+            wordWrap: true,
+            wordWrapWidth: this.canvasSize.width
+        };
+
+        let drawText = text.toLowerCase();
+        let canvasText = new PIXI.Text(drawText, style);
+
+        let canvasTextCenterX = (this.canvasSize.width - canvasText.width) / 2;
+        let canvasTextCenterY = (this.canvasSize.height - canvasText.height);
 
         canvasText.x = canvasTextCenterX;
         canvasText.y = canvasTextCenterY;
 
-        this.pixiCanvas.stage.addChild(canvasText);
+        this.layers.text.removeChildren();
+        this.layers.text.addChild(canvasText);
     }
 
     ngOnInit() {
         this.symbolForm = this.formBuilder.group({
             'title': ['', [
                 Validators.required,
-                Validators.minLength(4),
+                Validators.minLength(1),
                 Validators.maxLength(100),
+            ]],
+            'image': ['', [
+                Validators.required,
             ]],
         });
 
+        this.symbol = new Symbol();
+
         this.canvasSize = {
-            width: 200,
-            height: 200
+            width: 300,
+            height: 300
         };
 
         this.renderer.setElementStyle(this.createCanvas.nativeElement, 'width', this.canvasSize.width + 'px');
@@ -121,9 +187,13 @@ export class CreateSymbolComponent implements OnInit {
             resolution: 2
         });
 
-        this.createCanvasStage();
+        this.initCanvasLayers();
 
-        this.renderCanvasStage();
+        let animate = () => {
+            window.requestAnimationFrame(animate);
+            this.renderCanvasStage();
+        };
+        animate();
 
         this.pageService.setPageTitle('Create symbol');
     }
