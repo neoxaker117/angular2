@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { PageService } from "../MainComponent/main.service.ts";
 import { ApiService } from "../ApiComponent/api.service.ts";
@@ -7,12 +7,12 @@ import { SymbolService } from "../SymbolComponent/symbol.service.ts";
 
 @Component({
     providers: [ApiService, SymbolService],
-    selector: 'alphabetr-list',
-    templateUrl: 'list.component.html',
+    selector: 'alphabetr-list-last',
+    templateUrl: 'last-symbols.page.component.html',
 })
-export class ListComponent implements OnInit {
+export class LastSymbolsPageComponent implements OnInit {
 
-    @Input() symbolList: Array<Symbol>;
+    private symbolList: Array<Symbol>;
 
     constructor(private mainService: PageService,
                 private apiService: ApiService,
@@ -21,6 +21,10 @@ export class ListComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.apiService.getSymbolList().then((symbolList: Array<Symbol>) => {
+            this.symbolList = symbolList;
+        });
 
+        this.mainService.setPageTitle('List');
     }
 }
