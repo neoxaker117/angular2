@@ -1,30 +1,43 @@
 import { Injectable } from "@angular/core";
+import { Observable, Subject } from "rxjs";
 
 import { Symbol } from "../SymbolComponent/symbol.ts";
 
 @Injectable()
 export class ApiService {
 
-    constructor() {
+    private stream: Subject<Symbol>;
 
+    constructor() {
+        this.stream = <Subject<Symbol>>new Subject();
+    }
+
+    getStream() {
+        return this.stream.asObservable();
+    }
+
+    pushSymbol() {
+        let symbol: Symbol = new Symbol({id: +new Date(), title: 'Symbol'});
+
+        this.stream.next(symbol);
     }
 
     getSymbolById(id: number) {
         let symbol: Symbol = new Symbol({id: id, title: 'Symbol'});
 
-        return new Promise((resolve, reject) => {
-            resolve(symbol);
-        });
+        this.stream.next(symbol);
+
+        // return new Promise((resolve, reject) => {
+        //     resolve(symbol);
+        // });
     }
 
     getSymbolList() {
-        let symbolList: Array<Symbol> = [
-            new Symbol({id: 1, title: 'Symbol'}),
-            new Symbol({id: 2, title: 'Symbol'}),
-            new Symbol({id: 3, title: 'Symbol'}),
-            new Symbol({id: 4, title: 'Symbol'}),
-            new Symbol({id: 5, title: 'Symbol'}),
-        ];
+        let symbolList: Array<Symbol> = [];
+
+        for (let i = 0; i < 10; i++) {
+            symbolList.push(new Symbol({id: i, title: 'Symbol'}));
+        }
 
         return new Promise((resolve, reject) => {
             resolve(symbolList);

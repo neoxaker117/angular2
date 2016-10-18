@@ -21,12 +21,14 @@ export class SymbolPageComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.apiService.getStream().subscribe((symbol: Symbol) => {
+            this.symbol = symbol;
+        });
+
         this.route.params.forEach((params: Params) => {
             let id: number = Number(params['id']);
 
-            this.apiService.getSymbolById(id).then((symbol: Symbol) => {
-                this.symbol = symbol;
-            });
+            this.apiService.getSymbolById(id);
         });
 
         this.pageService.setPageTitle('Symbol');

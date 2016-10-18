@@ -8,7 +8,7 @@ import { CreateSymbolComponent } from "./CreateSymbolComponent/createsymbol.comp
 const appRoutes: Routes = [
     {
         path: '',
-        redirectTo: '/list',
+        redirectTo: '/last',
         pathMatch: 'full'
     },
     {
