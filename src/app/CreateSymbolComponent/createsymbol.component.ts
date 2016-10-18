@@ -75,13 +75,13 @@ export class CreateSymbolComponent implements OnInit {
     }
 
     initCanvasLayers() {
-        this.pixiCanvas.stage = new PIXI.Container();
-
         this.layers = {
             symbol: new PIXI.Container(),
             text: new PIXI.Container(),
             image: new PIXI.Container()
         };
+
+        this.pixiCanvas.stage = new PIXI.Container();
 
         this.pixiCanvas.stage.addChild(this.layers.image);
         this.pixiCanvas.stage.addChild(this.layers.symbol);
