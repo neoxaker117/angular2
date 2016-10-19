@@ -21,7 +21,7 @@ export class SymbolPageComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.apiService.getStream().subscribe((symbol: Symbol) => {
+        this.apiService.getSymbolStream().subscribe((symbol: Symbol) => {
             this.symbol = symbol;
         });
 

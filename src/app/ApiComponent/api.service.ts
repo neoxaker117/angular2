@@ -6,30 +6,26 @@ import { Symbol } from "../SymbolComponent/symbol.ts";
 @Injectable()
 export class ApiService {
 
-    private stream: Subject<Symbol>;
+    private symbolStream: Subject<Symbol>;
 
     constructor() {
-        this.stream = <Subject<Symbol>>new Subject();
+        this.symbolStream = <Subject<Symbol>>new Subject();
     }
 
-    getStream() {
-        return this.stream.asObservable();
+    getSymbolStream() {
+        return this.symbolStream.asObservable();
     }
 
     pushSymbol() {
         let symbol: Symbol = new Symbol({id: +new Date(), title: 'Symbol'});
 
-        this.stream.next(symbol);
+        this.symbolStream.next(symbol);
     }
 
     getSymbolById(id: number) {
         let symbol: Symbol = new Symbol({id: id, title: 'Symbol'});
 
-        this.stream.next(symbol);
-
-        // return new Promise((resolve, reject) => {
-        //     resolve(symbol);
-        // });
+        this.symbolStream.next(symbol);
     }
 
     getSymbolList() {
