@@ -1,0 +1,16 @@
+md-sidenav {
+  width: 250px;
+}
+
+md-sidenav-layout {
+  .md-sidenav {
+
+    &-content {
+      transform: none !important;
+      height: calc(100% - 64px);
+      margin: 64px 0 0;
+
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+}
