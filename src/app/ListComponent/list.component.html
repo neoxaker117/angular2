@@ -1,11 +1,11 @@
-<ul *ngIf="symbolList">
-    <li *ngFor="let symbol of symbolList"
-        (click)="symbolService.goToSymbolPage(symbol)">
-
+<md-list *ngIf="symbolList">
+    <md-list-item *ngFor="let symbol of symbolList"
+                  (click)="symbolService.goToSymbolPage(symbol)"
+    >
         <alphabetr-symbol
                 [symbol]="symbol"
         ></alphabetr-symbol>
-    </li>
-</ul>
+    </md-list-item>
+</md-list>
 
 

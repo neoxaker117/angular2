@@ -1,5 +1,10 @@
 Page:
 
+<md-progress-circle
+        *ngIf="!symbol"
+        mode="indeterminate"
+        color="accent"></md-progress-circle>
+
 <alphabetr-symbol
     [symbol]="symbol"
 ></alphabetr-symbol>

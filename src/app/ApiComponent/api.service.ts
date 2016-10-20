@@ -25,7 +25,9 @@ export class ApiService {
     getSymbolById(id: number) {
         let symbol: Symbol = new Symbol({id: id, title: 'Symbol'});
 
-        this.symbolStream.next(symbol);
+        setTimeout(() => {
+            this.symbolStream.next(symbol);
+        }, Math.random() * 1000);
     }
 
     getSymbolList() {
